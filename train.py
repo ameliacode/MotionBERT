@@ -5,6 +5,7 @@ import math
 import os
 import pickle
 import random
+import warnings
 from time import time
 
 import numpy as np
@@ -27,6 +28,8 @@ from lib.model.loss import *
 from lib.utils.learning import *
 from lib.utils.tools import *
 from lib.utils.utils_data import flip_data
+
+warnings.filterwarnings("ignore")
 
 
 def parse_args():
@@ -159,10 +162,10 @@ def evaluate(args, model_pos, test_loader, datareader):
     #    "s_09_act_05_subact_02",
     #    "s_09_act_10_subact_02",
     #    "s_09_act_13_subact_01",
-    #]
+    # ]
     for idx in range(len(action_clips)):
-        #source = source_clips[idx][0][:-6]
-        #if source in block_list:
+        # source = source_clips[idx][0][:-6]
+        # if source in block_list:
         #    continue
         frame_list = frame_clips[idx]
         action = action_clips[idx][0]
@@ -331,7 +334,9 @@ def train_with_config(args, opts):
             chk_filename = opts.evaluate if opts.evaluate else opts.resume
             print("Loading checkpoint", chk_filename)
             checkpoint = torch.load(
-                chk_filename, map_location=lambda storage, loc: storage
+                chk_filename,
+                map_location=lambda storage, loc: storage,
+                weights_only=False,
             )
             model_backbone.load_state_dict(checkpoint["model_pos"], strict=True)
             model_pos = model_backbone
@@ -339,7 +344,9 @@ def train_with_config(args, opts):
             chk_filename = os.path.join(opts.pretrained, opts.selection)
             print("Loading checkpoint", chk_filename)
             checkpoint = torch.load(
-                chk_filename, map_location=lambda storage, loc: storage
+                chk_filename,
+                map_location=lambda storage, loc: storage,
+                weights_only=False,
             )
             model_backbone.load_state_dict(checkpoint["model_pos"], strict=True)
             model_pos = model_backbone
@@ -351,7 +358,9 @@ def train_with_config(args, opts):
             chk_filename = opts.evaluate if opts.evaluate else opts.resume
             print("Loading checkpoint", chk_filename)
             checkpoint = torch.load(
-                chk_filename, map_location=lambda storage, loc: storage
+                chk_filename,
+                map_location=lambda storage, loc: storage,
+                weights_only=False,
             )
             model_backbone.load_state_dict(checkpoint["model_pos"], strict=True)
         model_pos = model_backbone

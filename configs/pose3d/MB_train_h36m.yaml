@@ -23,8 +23,8 @@ num_heads: 8
 att_fuse: True
 
 # Data
-data_root: data/motion3d/MB3D_f243s81/
-subset_list: [H36M-SH]
+data_root: data/motion3d/
+subset_list: [frame_243]
 dt_file: h36m_sh_conf_cam_source_final.pkl
 clip_len: 243
 data_stride: 81
