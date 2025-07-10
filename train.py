@@ -155,15 +155,15 @@ def evaluate(args, model_pos, test_loader, datareader):
     for action in action_names:
         results[action] = []
         results_procrustes[action] = []
-    block_list = [
-        "s_09_act_05_subact_02",
-        "s_09_act_10_subact_02",
-        "s_09_act_13_subact_01",
-    ]
+    # block_list = [
+    #    "s_09_act_05_subact_02",
+    #    "s_09_act_10_subact_02",
+    #    "s_09_act_13_subact_01",
+    #]
     for idx in range(len(action_clips)):
-        source = source_clips[idx][0][:-6]
-        if source in block_list:
-            continue
+        #source = source_clips[idx][0][:-6]
+        #if source in block_list:
+        #    continue
         frame_list = frame_clips[idx]
         action = action_clips[idx][0]
         factor = factor_clips[idx][:, None, None]
